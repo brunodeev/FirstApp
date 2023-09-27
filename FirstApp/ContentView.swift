@@ -7,20 +7,35 @@ struct ContentView: View {
     var body: some View {
         VStack {
             Text("\(number)")
-                .font(.largeTitle)
+                .font(.system(size: 100))
                 .bold()
+                .foregroundStyle(number == 10 ? .red : .black)
             Spacer()
                 .frame(height: 100)
             HStack {
-                Button("Clique", action: increment)
-                    .buttonStyle(.borderedProminent)
+                Button(action: decrement){
+                    Text("-")
+                        .font(.system(size: 50))
+                        .bold()
+                        .padding(EdgeInsets(top: 0, leading: 50, bottom: 0, trailing: 50))
+                }
+                .background(.red)
+                .foregroundColor(.white)
+                .clipShape(.rect(cornerRadius: 10))
                 Spacer()
                     .frame(width: 50)
-                Button("Clique", role: .destructive, action: decrement)
-                    .buttonStyle(.borderedProminent)
+                Button(action: increment){
+                    Text("+")
+                        .font(.system(size: 50))
+                        .padding(EdgeInsets(top: 0, leading: 50, bottom: 0, trailing: 50))
+                }
+                .background(.blue)
+                .foregroundColor(.white)
+                .clipShape(.rect(cornerRadius: 10))
             }
         }
-        .font(.title)
+        .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/, maxHeight: .infinity)
+        .background(.cyan.opacity(0.6))
     }
     
     func increment(){
