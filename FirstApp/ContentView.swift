@@ -5,37 +5,44 @@ struct ContentView: View {
     @State var number = 0
     
     var body: some View {
-        VStack {
-            Text("\(number)")
-                .font(.system(size: 100))
-                .bold()
-                .foregroundStyle(number == 10 ? .red : .black)
-            Spacer()
-                .frame(height: 100)
-            HStack {
-                Button(action: decrement){
-                    Text("-")
-                        .font(.system(size: 50))
-                        .bold()
-                        .padding(EdgeInsets(top: 0, leading: 50, bottom: 0, trailing: 50))
-                }
-                .background(.red)
-                .foregroundColor(.white)
-                .clipShape(.rect(cornerRadius: 10))
+        ZStack{
+            Image("Java_BG")
+                .resizable()
+                .ignoresSafeArea(.all)
+                .scaledToFill()
+                .opacity(0.5)
+            VStack {
+                Text("\(number)")
+                    .font(.system(size: 100))
+                    .bold()
+                    .foregroundStyle(number == 10 ? .red : .white)
                 Spacer()
-                    .frame(width: 50)
-                Button(action: increment){
-                    Text("+")
-                        .font(.system(size: 50))
-                        .padding(EdgeInsets(top: 0, leading: 50, bottom: 0, trailing: 50))
+                    .frame(height: 100)
+                HStack {
+                    Button(action: decrement){
+                        Text("-")
+                            .font(.system(size: 50))
+                            .bold()
+                            .padding(EdgeInsets(top: 10, leading: 50, bottom: 10, trailing: 50))
+                    }
+                    .background(.red)
+                    .foregroundColor(.white)
+                    .clipShape(.rect(cornerRadius: 10))
+                    Spacer()
+                        .frame(width: 50)
+                    Button(action: increment){
+                        Text("+")
+                            .font(.system(size: 50))
+                            .padding(EdgeInsets(top: 10, leading: 50, bottom: 10, trailing: 50))
+                    }
+                    .background(.blue)
+                    .foregroundColor(.white)
+                    .clipShape(.rect(cornerRadius: 10))
                 }
-                .background(.blue)
-                .foregroundColor(.white)
-                .clipShape(.rect(cornerRadius: 10))
             }
+            .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/, maxHeight: .infinity)
         }
-        .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/, maxHeight: .infinity)
-        .background(.cyan.opacity(0.6))
+        .background(.black)
     }
     
     func increment(){
