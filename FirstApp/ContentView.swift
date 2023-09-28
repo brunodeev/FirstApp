@@ -10,12 +10,13 @@ struct ContentView: View {
                 .resizable()
                 .ignoresSafeArea(.all)
                 .scaledToFill()
-                .opacity(0.5)
+                .opacity(0.4)
             VStack {
-                Text("\(number)")
-                    .font(.system(size: 100))
+                Text(number <= 10 ? "\(number)" : "Estourou o limite já")
+                    .font(.system(size: number <= 10 ? 90 : 40))
                     .bold()
                     .foregroundStyle(number == 10 ? .red : .white)
+                
                 Spacer()
                     .frame(height: 100)
                 HStack {
@@ -46,7 +47,7 @@ struct ContentView: View {
     }
     
     func increment(){
-        if(number < 10){
+        if(number <= 10){
             self.number += 1
         }
     }
