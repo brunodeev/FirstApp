@@ -1,9 +1,3 @@
-//
-//  FirstAppApp.swift
-//  FirstApp
-//
-//  Created by Bruno César on 26/09/23.
-//
 
 import SwiftUI
 
@@ -11,7 +5,8 @@ import SwiftUI
 struct FirstAppApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            RedView()
+                .environment(\.colorScheme, .light)
         }
     }
 }

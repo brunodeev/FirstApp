@@ -1,67 +1,80 @@
 
 import SwiftUI
 
-struct ContentView: View {
-    @State var number = 0
-    
+struct RedView: View {
     var body: some View {
-        ZStack{
-            Image("Java_BG")
-                .resizable()
-                .ignoresSafeArea(.all)
-                .scaledToFill()
-                .opacity(0.4)
-            VStack {
-                Text(number <= 10 ? "\(number)" : "Estourou o limite já")
-                    .font(.system(size: number <= 10 ? 90 : 40))
-                    .bold()
-                    .foregroundStyle(number == 10 ? .red : .white)
-                
-                Spacer()
-                    .frame(height: 100)
-                HStack {
-                    Button(action: decrement){
-                        Text("-")
-                            .font(.system(size: 50))
-                            .bold()
-                            .padding(EdgeInsets(top: 10, leading: 50, bottom: 10, trailing: 50))
-                    }
-                    .background(.red)
-                    .foregroundColor(.white)
-                    .clipShape(.rect(cornerRadius: 10))
-                    Spacer()
-                        .frame(width: 50)
-                    Button(action: increment){
-                        Text("+")
-                            .font(.system(size: 50))
-                            .padding(EdgeInsets(top: 10, leading: 50, bottom: 10, trailing: 50))
-                    }
-                    .background(.blue)
-                    .foregroundColor(.white)
-                    .clipShape(.rect(cornerRadius: 10))
+        NavigationView(content: {
+            VStack{
+                CircleNumber(color: .red, number: 1)
+                    .navigationBarTitle("Página 1", displayMode: .inline)
+                    .offset(y: -40)
+                NavigationLink(destination: BlueView()) {
+                    Text("Próximo")
+                        .font(.system(size: 20))
+                        .frame(width: 230, height: 60)
+                        .background(.blue)
+                        .foregroundStyle(.white)
+                        .clipShape(.rect(cornerRadius: 16))
                 }
             }
-            .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/, maxHeight: .infinity)
-        }
-        .background(.black)
+        })
     }
-    
-    func increment(){
-        if(number <= 10){
-            self.number += 1
+}
+
+struct BlueView: View {
+    var body: some View {
+        VStack{
+            CircleNumber(color: .cyan, number: 2)
+                .navigationTitle("Página 2")
+                .offset(y: -40)
+            NavigationLink(destination: GreenView()) {
+                Text("Próximo")
+                    .frame(width: 230, height: 60)
+                    .background(.blue)
+                    .foregroundStyle(.white)
+                    .clipShape(.rect(cornerRadius: 16))
+            }
         }
     }
+}
+
+struct GreenView: View {
+    var body: some View {
+        VStack{
+            CircleNumber(color: .green, number: 3)
+                .navigationTitle("Página 3")
+                .offset(y: -40)
+            NavigationLink(destination: BlueView()) {
+                Text("Próximo")
+                    .frame(width: 230, height: 60)
+                    .background(.blue)
+                    .foregroundStyle(.white)
+                    .clipShape(.rect(cornerRadius: 16))
+            }
+        }
+    }
+}
+
+struct CircleNumber: View {
     
-    func decrement(){
-        if(number > 0){
-            self.number -= 1
+    var color: Color
+    var number: Int
+    
+    var body: some View {
+        ZStack {
+            Circle()
+                .frame(width: 200)
+                .foregroundStyle(color)
+            Text("\(number)")
+                .font(.system(size: 100, weight: .bold))
+                .foregroundStyle(.white)
         }
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        RedView()
     }
 }
 
